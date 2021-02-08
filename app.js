@@ -89,8 +89,6 @@ function displayPerson(person){
   personInfo += "Weight: " + person.Weight + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Occupation: " + person.Occupation + "\n";
-  personInfo += "Parents: " + person.parents + "\n";
-  personInfo += "Spouse: " + person.currentSpouse.firstName + " " + person.currentSpouse.lastName + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
