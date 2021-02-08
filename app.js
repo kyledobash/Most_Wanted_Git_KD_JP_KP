@@ -38,9 +38,11 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
+      displayPerson(person);
     break;
     case "family":
     // TODO: get person's family
+      displayFamily(person);
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -91,6 +93,17 @@ function displayPerson(person){
   personInfo += "Occupation: " + person.Occupation + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
+}
+
+function displayFamily(person) {
+  if (person.parents === null) {
+    console.log("No parents found")
+  }
+  else {
+    for (var i = 0; i < person.parents.length; i++) {
+      displayPerson(parent);
+    }
+  }
 }
 
 // function that prompts and validates user input
