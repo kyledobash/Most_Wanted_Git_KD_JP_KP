@@ -7,21 +7,22 @@ Build all of your functions for displaying and gathering information below (GUI)
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
+  
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
       displayPeople(searchResults);
       break;
     case 'no':
-      searchResults = searchByTrait(people)
+      searchResults = searchByMultipleTrait(people)
       displayPeople(searchResults);
+      let selectedName = searchByName(searchResults);
       // TODO: search by traits
       break;
       default:
     app(people); // restart app
       break;
   }
-  
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
@@ -76,9 +77,21 @@ function searchByName(people){
   return foundPerson;
 }
 
+function searchByMultipleTrait(people){
+  let input = promptFor("How many traits do you want to search for?", chars);
+  let numberOfTraits = parseInt(input); //convert input to an int
+  let filteredPeople = searchByTrait(people);
+
+  while(numberOfTraits - 1 > 0){
+    filteredPeople = searchByTrait(filteredPeople);
+    numberOfTraits --;
+  }
+  return filteredPeople;
+}
+
 
 function searchByTrait(people) {
-  let selectedTrait = promptFor("Which trait would you like to search by?/n gender - date of birth - height - weight - eye color - occupation", chars);
+  let selectedTrait = promptFor("Which trait would you like to search by\n gender - date of birth - height - weight - eye color - occupation", chars);
 
   switch(selectedTrait) {
     case "gender":
@@ -97,7 +110,7 @@ function searchByTrait(people) {
       let selectedEyeColor = promptFor("Enter eye color", chars);
       return searchByEyeColor(people, selectedEyeColor);
     case "occupation":
-      let selectedOccupation = promptFor("Enter occupation", chars);
+      let selectedOccupation = promptFor("Enter eye color", chars);
       return searchByOccupation(people, selectedOccupation);
   }
 }
