@@ -10,8 +10,11 @@ function app(people){
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
+      displayPeople(searchResults);
       break;
     case 'no':
+      searchResults = searchByHeight(people)
+      displayPeople(searchResults);
       // TODO: search by traits
       break;
       default:
@@ -73,102 +76,119 @@ function searchByName(people){
   return foundPerson;
 }
 
-function searchByTrait(people) {
-  let selectedTrait = promptFor("Which trait would you like to search by?/n gender - date of birth - height - weight - eye color - occupation", chars);
+function searchByHeight(people){
+  let height = promptFor("What is the person's height in inches?", chars);
+  
 
-  switch(selectedTrait) {
-    case "gender":
-      let selectedGender = promptFor("Type Male or Female");
-      return searchByGender(people, selectedGender);
-    case "date of birth":
-      let selectedDOB = promptFor("Enter date of birth (example: 1/24/1957)");
-      return searchByDOB(people, selectedDOB);
-    case "height":
-      let selectedHeight = promptFor("Enter height in inches");
-      return searchByHeight(people, selectedHeight);
-    case "weight":
-        let selectedWeight = promptFor("Enter weight in pounds (lbs)");
-        return searchByWeight(people, selectedWeight);
-    case "eye color":
-      let selectedEyeColor = promptFor("Enter eye color");
-      return searchByEyeColor(people, selectedEyeColor);
-    case "occupation":
-      let selectedOccupation = promptFor("Enter eye color");
-      return searchOccupation(people, selectedOccupation);
-  }
-}
-
-function searchByOccupation(people, selection) {
-  let foundPeople = people.filter(function(person){
-    if(person.occupation === selection){
+  let foundPerson = people.filter(function(person){
+    if(person.height === height){
       return true;
     }
-    else {
+    else{
       return false;
     }
   })
-  return foundPeople;
+  // TODO: find the person using the name they entered
+  return foundPerson;
 }
 
-function searchByEyeColor(people, selection) {
-  let foundPeople = people.filter(function(person){
-    if(person.eyeColor === selection){
-      return true;
-    }
-    else {
-      return false;
-    }
-  })
-  return foundPeople;
-}
+// function searchByTrait(people) {
+//   let selectedTrait = promptFor("Which trait would you like to search by?/n gender - date of birth - height - weight - eye color - occupation", chars);
 
-function searchByWeight(people, selection) {
-  let foundPeople = people.filter(function(person){
-    if(person.weight === selection){
-      return true;
-    }
-    else {
-      return false;
-    }
-  })
-  return foundPeople;
-}
+//   switch(selectedTrait) {
+//     case "gender":
+//       let selectedGender = promptFor("Type Male or Female");
+//       return searchByGender(people, selectedGender);
+//     case "date of birth":
+//       let selectedDOB = promptFor("Enter date of birth (example: 1/24/1957)");
+//       return searchByDOB(people, selectedDOB);
+//     case "height":
+//       let selectedHeight = promptFor("Enter height in inches");
+//       return searchByHeight(people, selectedHeight);
+//     case "weight":
+//         let selectedWeight = promptFor("Enter weight in pounds (lbs)");
+//         return searchByWeight(people, selectedWeight);
+//     case "eye color":
+//       let selectedEyeColor = promptFor("Enter eye color");
+//       return searchByEyeColor(people, selectedEyeColor);
+//     case "occupation":
+//       let selectedOccupation = promptFor("Enter eye color");
+//       return searchOccupation(people, selectedOccupation);
+//   }
+// }
 
-function searchByHeight(people, selection) {
-  let foundPeople = people.filter(function(person){
-    if(person.height === selection){
-      return true;
-    }
-    else {
-      return false;
-    }
-  })
-  return foundPeople;
-}
+// function searchByOccupation(people, selection) {
+//   let foundPeople = people.filter(function(person){
+//     if(person.occupation === selection){
+//       return true;
+//     }
+//     else {
+//       return false;
+//     }
+//   })
+//   return foundPeople;
+// }
 
-function searchByDOB(people, selection) {
-  let foundPeople = people.filter(function(person){
-    if(person.dob === selection){
-      return true;
-    }
-    else {
-      return false;
-    }
-  })
-  return foundPeople;
-}
+// function searchByEyeColor(people, selection) {
+//   let foundPeople = people.filter(function(person){
+//     if(person.eyeColor === selection){
+//       return true;
+//     }
+//     else {
+//       return false;
+//     }
+//   })
+//   return foundPeople;
+// }
 
-function searchByGender(people, selection) {
-  let foundPeople = people.filter(function(person){
-    if(person.gender === selection){
-      return true;
-    }
-    else {
-      return false;
-    }
-  })
-  return foundPeople;
-}
+// function searchByWeight(people, selection) {
+//   let foundPeople = people.filter(function(person){
+//     if(person.weight === selection){
+//       return true;
+//     }
+//     else {
+//       return false;
+//     }
+//   })
+//   return foundPeople;
+// }
+
+// function searchByHeight(people, selection) {
+//   let foundPeople = people.filter(function(person){
+//     if(person.height === selection){
+//       return true;
+//     }
+//     else {
+//       return false;
+//     }
+//   })
+//   return foundPeople;
+// }
+
+// function searchByDOB(people, selection) {
+//   let foundPeople = people.filter(function(person){
+//     if(person.dob === selection){
+//       return true;
+//     }
+//     else {
+//       return false;
+//     }
+//   })
+//   return foundPeople;
+// }
+
+// function searchByGender(people, selection) {
+//   let foundPeople = people.filter(function(person){
+//     if(person.gender === selection){
+//       foundPeople.push(person)
+//       return true;
+//     }
+//     else {
+//       return false;
+//     }
+//   })
+//   console.log(foundPeople);
+// }
 
 
 // alerts a list of people
@@ -225,3 +245,7 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+
+// Fix search by trait, uncomment out the switch case & helper methods 
+// Fix the search Family method to inculde Spouses and Sibs
