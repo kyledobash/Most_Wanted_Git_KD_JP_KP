@@ -45,7 +45,7 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
-      displayFamily(person);
+      displayFamily(person, people);
     break;
     case "descendants":
       displayDescendants(GetDescendants(person, people));
@@ -221,6 +221,71 @@ function displayFamily(person) {
     }
   }
 }
+function getSpouse(selectedPerson, people){
+  var spouseId;
+  spouseId = selectedPerson.currentSpouse;
+  let foundSpouse = people.filter(function(person){
+    if(spouseId === person.id){
+      return true;
+    }
+    else {
+      return false;
+    }
+  })
+  return foundSpouse;
+}
+
+function getParents(selectedPerson, people){
+  let foundParents = people.filter(function(person){
+    if(selectedPerson.parents[0] === person.id || selectedPerson.parents[1] === person.id){
+      return true;
+    }
+    else {
+      return false;
+    }
+  })
+  return foundParents;
+}
+
+function getSibs(selectedPerson, people){
+  let foundParents = people.filter(function(person){
+    if(selectedPerson.parents[0] === person.parents[0] || selectedPerson.parents[0] === person.parents[1]){
+      return true;
+    }
+    else if (selectedPerson.parents[1] === person.parents[1] || selectedPerson.parents[1] === person.parents[0]) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  })
+  return foundParents;
+}
+
+function displayFamily(person, people){
+  let displayFamily = "";
+  let selectedParents = getParents(person, people);
+  let selectedSpouse = getSpouse(person, people);
+  let selectedSibs = getSibs(person, people);
+  
+  displayFamily += displayHelper(selectedParents, displayFamily);
+  displayFamily += displayHelper(selectedSpouse, displayFamily);
+  displayFamily += displayHelper(selectedSibs, displayFamily);
+
+  //declare display string
+  //call all helper functions and set to variables
+  //iterate over variables and concatenate string
+  //alert with string
+  alert(displayFamily);
+}
+
+function displayHelper(toDisplay, inputString){
+  for (let i= 0; i < toDisplay.length; i++) {
+    displayFamily += toDisplay[i].firstName + " " + toDisplay[i].lastName + "\n";    
+  }
+  return displayFamily;
+}
+
 
 function GetDescendants(selectedPerson, people, descendants = []) {
   
