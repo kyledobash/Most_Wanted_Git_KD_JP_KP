@@ -85,19 +85,19 @@ function searchByTrait(people) {
       let selectedGender = promptFor("Type Male or Female", chars);
       return searchByGender(people, selectedGender);
     case "date of birth":
-      let selectedDOB = promptFor("Enter date of birth (example: 1/24/1957)");
+      let selectedDOB = promptFor("Enter date of birth (example: 1/24/1957)", chars);
       return searchByDOB(people, selectedDOB);
     case "height":
-      let selectedHeight = promptFor("Enter height in inches");
+      let selectedHeight = promptFor("Enter height in inches", chars);
       return searchByHeight(people, selectedHeight);
     case "weight":
-        let selectedWeight = promptFor("Enter weight in pounds (lbs)");
+        let selectedWeight = promptFor("Enter weight in pounds (lbs)", chars);
         return searchByWeight(people, selectedWeight);
     case "eye color":
-      let selectedEyeColor = promptFor("Enter eye color");
+      let selectedEyeColor = promptFor("Enter eye color", chars);
       return searchByEyeColor(people, selectedEyeColor);
     case "occupation":
-      let selectedOccupation = promptFor("Enter eye color");
+      let selectedOccupation = promptFor("Enter eye color", chars);
       return searchOccupation(people, selectedOccupation);
   }
 }
