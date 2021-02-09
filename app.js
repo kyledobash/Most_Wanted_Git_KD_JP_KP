@@ -48,7 +48,7 @@ function mainMenu(person, people){
       displayFamily(person);
     break;
     case "descendants":
-    // TODO: get person's descendants
+      displayDescendants(GetDescendants(person, people));
     break;
     case "restart":
     app(people); // restart
@@ -65,7 +65,7 @@ function searchByName(people){
   let lastName = promptFor("What is the person's last name?", chars);
 
   let foundPerson = people.filter(function(person){
-    if(chars(person.firstName) == firstName && chars(person.lastName) == lastName){
+    if(person.firstName == firstName && person.lastName == lastName){
       return true;
     }
     else{
@@ -222,8 +222,24 @@ function displayFamily(person) {
   }
 }
 
-function displayDescendants(person) {
+function GetDescendants(selectedPerson, people, descendants = []) {
+  
+    // person.parents[0].id == selectedPerson.id || person.parents[1].id == selectedPerson.id
+    for (var i = 0; i < people.length; i++) {
+      if (people[i].parents[0] == selectedPerson.id || people[i].parents[1] == selectedPerson.id) {
+        descendants.push(people[i]);
+        GetDescendants(people[i], people, descendants);
+      }
+    }
+  return descendants;
+}
 
+function displayDescendants(descendants) {
+  let descendantsString = "";
+  for (var i = 0; i < descendants.length; i++) {
+    descendantsString += descendants[i].firstName + " " + descendants[i].lastName + "\n";
+  }
+  alert(descendantsString);
 }
 
 // function that prompts and validates user input
