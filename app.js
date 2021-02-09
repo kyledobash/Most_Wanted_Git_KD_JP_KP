@@ -11,7 +11,6 @@ function app(people){
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
-      displayPeople(searchResults);
       break;
     case 'no':
       searchResults = searchByMultipleTrait(people)
@@ -66,7 +65,7 @@ function searchByName(people){
   let lastName = promptFor("What is the person's last name?", chars);
 
   let foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+    if(chars(person.firstName) == firstName && chars(person.lastName) == lastName){
       return true;
     }
     else{
@@ -74,7 +73,8 @@ function searchByName(people){
     }
   })
   // TODO: find the person using the name they entered
-  return foundPerson;
+  let foundPersonObj = foundPerson[0];
+  return foundPersonObj;
 }
 
 function searchByMultipleTrait(people){
@@ -204,9 +204,9 @@ function displayPerson(person){
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "DOB: " + person.dob + "\n";
   personInfo += "Height: " + person.height + "\n";
-  personInfo += "Weight: " + person.Weight + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
-  personInfo += "Occupation: " + person.Occupation + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
